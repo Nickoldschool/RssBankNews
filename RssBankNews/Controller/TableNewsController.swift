@@ -13,7 +13,7 @@ final class TableNewsController: UIViewController {
     
     let tableViewNews = UITableView()
     let detailedNewsController = DetailedNewsController()
-
+    var posts: [Post]?
 
     
     override func viewDidLoad() {
@@ -22,11 +22,13 @@ final class TableNewsController: UIViewController {
         configure()
         addSubViews()
         addConstraints()
+        fetchData()
     }
     
     private func configure() {
         
         view.backgroundColor = .white
+        navigationItem.title = "Bank News"
         tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
         tableViewNews.delegate = self
         tableViewNews.dataSource = self
@@ -46,6 +48,16 @@ final class TableNewsController: UIViewController {
             tableViewNews.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableViewNews.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+    
+    private func fetchData() {
+        let networkManager = NetworkManager()
+        networkManager.parseNews(url: "https://www.banki.ru/xml/news.rss") { (posts) in
+            self.posts = posts
+            OperationQueue.main.addOperation {
+                self.tableViewNews.reloadSections(IndexSet(integer: 0), with: .left)
+            }
+        }
     }
     
 }

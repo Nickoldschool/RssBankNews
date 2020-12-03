@@ -19,7 +19,7 @@ extension TableNewsController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 120
     }
 
 }
@@ -27,11 +27,17 @@ extension TableNewsController: UITableViewDelegate {
 extension TableNewsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard let posts = posts else { return 0 }
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableViewNews.dequeueReusableCell(withIdentifier: TableNewsCell.identifier, for: indexPath) as? TableNewsCell else {return UITableViewCell()}
+//        if let item = posts?[indexPath.row] {
+//            cell.item = item
+//        }
+        guard let item = posts?[indexPath.row] else { return UITableViewCell()}
+        cell.update(post: item)
         return cell
     }
     

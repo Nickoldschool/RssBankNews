@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		404244FA25790C70000C08AE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404244F925790C70000C08AE /* Post.swift */; };
+		404244FD25790CDB000C08AE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404244FC25790CDB000C08AE /* NetworkManager.swift */; };
 		404CEA862577C67E006FC834 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404CEA852577C67E006FC834 /* AppDelegate.swift */; };
 		404CEA8F2577C680006FC834 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 404CEA8E2577C680006FC834 /* Assets.xcassets */; };
 		404CEA922577C680006FC834 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 404CEA902577C680006FC834 /* LaunchScreen.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		404244F925790C70000C08AE /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		404244FC25790CDB000C08AE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		404CEA822577C67E006FC834 /* RssBankNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RssBankNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		404CEA852577C67E006FC834 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		404CEA8E2577C680006FC834 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +43,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		404244F625790C26000C08AE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				404244F725790C2E000C08AE /* Model */,
+				404244F825790C36000C08AE /* Client */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		404244F725790C2E000C08AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				404244F925790C70000C08AE /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		404244F825790C36000C08AE /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				404244FC25790CDB000C08AE /* NetworkManager.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
 		404CEA792577C67E006FC834 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +88,7 @@
 		404CEA842577C67E006FC834 /* RssBankNews */ = {
 			isa = PBXGroup;
 			children = (
+				404244F625790C26000C08AE /* Network */,
 				404CEAAA2577F980006FC834 /* Application */,
 				404CEAA62577F8F5006FC834 /* Model */,
 				404CEAA72577F8FC006FC834 /* View */,
@@ -182,6 +212,8 @@
 				404CEABD25780846006FC834 /* TableNewsCell.swift in Sources */,
 				404CEAA12577F7F4006FC834 /* DetailedNewsController.swift in Sources */,
 				404CEAB825780505006FC834 /* TableNewsController+.swift in Sources */,
+				404244FD25790CDB000C08AE /* NetworkManager.swift in Sources */,
+				404244FA25790C70000C08AE /* Post.swift in Sources */,
 				404CEA9E2577F7CC006FC834 /* TableNewsController.swift in Sources */,
 				404CEA862577C67E006FC834 /* AppDelegate.swift in Sources */,
 			);

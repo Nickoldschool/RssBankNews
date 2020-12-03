@@ -13,17 +13,13 @@ final class TableNewsCell: UITableViewCell {
     let titleLable = UILabel()
     let dateLabel = UILabel()
     let stateLabel = UILabel()
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
+//    var item: Post! {
+//        didSet {
+//            titleLable.text = item.title
+//            dateLabel.text = item.pubDate
+//        }
+//    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,9 +37,9 @@ final class TableNewsCell: UITableViewCell {
         
         titleLable.numberOfLines = 0
         titleLable.textAlignment = .center
-        titleLable.text = "Исследование: россияне отказались от массовых покупок в период «черной пятницы — 2020»"
-        dateLabel.text = " 3 Dec 2020, 11:13"
         stateLabel.text = "Просмотрено"
+        stateLabel.textColor = .darkGray
+        titleLable.font = .boldSystemFont(ofSize: 20)
     }
     
     private func addSubViews() {
@@ -59,17 +55,22 @@ final class TableNewsCell: UITableViewCell {
         }
         
         NSLayoutConstraint.activate([
-            titleLable.topAnchor.constraint(equalTo: topAnchor),
+            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             titleLable.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             titleLable.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
 
             stateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             stateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
         ])
+    }
+    
+    func update(post: Post) {
+        titleLable.text = post.title
+        dateLabel.text = post.pubDate
     }
 
 }
