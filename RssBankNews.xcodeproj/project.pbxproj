@@ -88,8 +88,8 @@
 		404CEA842577C67E006FC834 /* RssBankNews */ = {
 			isa = PBXGroup;
 			children = (
-				404244F625790C26000C08AE /* Network */,
 				404CEAAA2577F980006FC834 /* Application */,
+				404244F625790C26000C08AE /* Network */,
 				404CEAA62577F8F5006FC834 /* Model */,
 				404CEAA72577F8FC006FC834 /* View */,
 				404CEAA82577F904006FC834 /* Controller */,
@@ -101,6 +101,7 @@
 		404CEAA62577F8F5006FC834 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				404CEABC25780846006FC834 /* TableNewsCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,7 +116,6 @@
 		404CEAA82577F904006FC834 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				404CEABC25780846006FC834 /* TableNewsCell.swift */,
 				404CEA9D2577F7CC006FC834 /* TableNewsController.swift */,
 				404CEAA02577F7F4006FC834 /* DetailedNewsController.swift */,
 			);

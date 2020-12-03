@@ -14,13 +14,6 @@ final class TableNewsCell: UITableViewCell {
     let dateLabel = UILabel()
     let stateLabel = UILabel()
     
-//    var item: Post! {
-//        didSet {
-//            titleLable.text = item.title
-//            dateLabel.text = item.pubDate
-//        }
-//    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

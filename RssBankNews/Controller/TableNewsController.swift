@@ -14,7 +14,13 @@ final class TableNewsController: UIViewController {
     let tableViewNews = UITableView()
     let detailedNewsController = DetailedNewsController()
     var posts: [Post]?
-
+    
+    let myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,22 +32,20 @@ final class TableNewsController: UIViewController {
     }
     
     private func configure() {
-        
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
         tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
         tableViewNews.delegate = self
         tableViewNews.dataSource = self
         tableViewNews.translatesAutoresizingMaskIntoConstraints = false
+        tableViewNews.refreshControl = myRefreshControl
     }
     
     private func addSubViews() {
-        
         view.addSubview(tableViewNews)
     }
     
     private func addConstraints() {
-        
         NSLayoutConstraint.activate([
             tableViewNews.topAnchor.constraint(equalTo: view.topAnchor),
             tableViewNews.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -58,6 +62,12 @@ final class TableNewsController: UIViewController {
                 self.tableViewNews.reloadSections(IndexSet(integer: 0), with: .left)
             }
         }
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl) {
+        fetchData()
+        tableViewNews.reloadData()
+        sender.endRefreshing()
     }
     
 }
