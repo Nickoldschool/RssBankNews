@@ -8,11 +8,45 @@
 import UIKit
 
 final class TableNewsController: UIViewController {
+    
+    //MARK: - Properties
+    
+    let tableViewNews = UITableView()
+    let detailedNewsController = DetailedNewsController()
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configure()
+        addSubViews()
+        addConstraints()
+    }
+    
+    private func configure() {
+        
         view.backgroundColor = .white
+        tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
+        tableViewNews.delegate = self
+        tableViewNews.dataSource = self
+        tableViewNews.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func addSubViews() {
+        
+        view.addSubview(tableViewNews)
+    }
+    
+    private func addConstraints() {
+        
+        NSLayoutConstraint.activate([
+            tableViewNews.topAnchor.constraint(equalTo: view.topAnchor),
+            tableViewNews.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableViewNews.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableViewNews.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
     
 }
+
