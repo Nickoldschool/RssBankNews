@@ -7,6 +7,13 @@
 
 import UIKit
 
+// Для изменения статуса ячейки на "Просмотрено" на главной странице
+
+protocol ChangeState: AnyObject {
+    func change(state: Bool) -> Bool
+}
+
+
 final class TableNewsCell: UITableViewCell {
     
     static var identifier = "WeatherTableViewCell"
@@ -65,5 +72,4 @@ final class TableNewsCell: UITableViewCell {
         titleLable.text = post.title
         dateLabel.text = post.pubDate
     }
-
 }

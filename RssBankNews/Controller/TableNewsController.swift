@@ -9,6 +9,7 @@ import UIKit
 
 final class TableNewsController: UIViewController {
     
+    
     //MARK: - Properties
     
     let tableViewNews = UITableView()
@@ -21,6 +22,8 @@ final class TableNewsController: UIViewController {
         return refreshControl
     }()
     
+    weak var delegateNews: PassData?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,7 @@ final class TableNewsController: UIViewController {
     }
     
     private func configure() {
+        delegateNews = detailedNewsController
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
         tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
