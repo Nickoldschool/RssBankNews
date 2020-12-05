@@ -30,7 +30,6 @@ final class DetailedNewsController: UIViewController {
     private func configure() {
         
         view.backgroundColor = .white
-        
         [titleLable, dateLabel].forEach {
             $0.numberOfLines = 0
         }
@@ -55,7 +54,7 @@ final class DetailedNewsController: UIViewController {
         
         NSLayoutConstraint.activate([
             titleLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLable.widthAnchor.constraint(equalTo: view.widthAnchor),
+            titleLable.widthAnchor.constraint(equalToConstant: view.bounds.width - 15),
             titleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             dateLabel.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: 15),
@@ -77,3 +76,4 @@ extension DetailedNewsController: PassData {
         descriptionLabel.text = post.description
     }
 }
+

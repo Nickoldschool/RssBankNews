@@ -14,6 +14,9 @@ extension TableNewsController: UITableViewDelegate {
         switch indexPath.row {
         case 0...indexPath.row:
             delegateNews?.loadNews(post: currentPost)
+            //delegateState?.change(post: currentPost, state: "Просмотрено")
+            tableViewNews.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            tableViewNews.reloadData()
             navigationController?.pushViewController(detailedNewsController, animated: true)
         default:
             print("Something went wrong")
@@ -36,6 +39,7 @@ extension TableNewsController: UITableViewDataSource {
         guard let cell = tableViewNews.dequeueReusableCell(withIdentifier: TableNewsCell.identifier, for: indexPath) as? TableNewsCell else { return UITableViewCell() }
         guard let item = posts?[indexPath.row] else { return UITableViewCell()}
         cell.update(post: item)
+        //cell.accessoryType = .disclosureIndicator
         return cell
     }
     

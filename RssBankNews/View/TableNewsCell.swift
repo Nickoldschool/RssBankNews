@@ -10,7 +10,7 @@ import UIKit
 // Для изменения статуса ячейки на "Просмотрено" на главной странице
 
 protocol ChangeState: AnyObject {
-    func change(state: Bool) -> Bool
+    func change(post: Post, state: String) -> String
 }
 
 
@@ -37,7 +37,6 @@ final class TableNewsCell: UITableViewCell {
         
         titleLable.numberOfLines = 0
         titleLable.textAlignment = .center
-        stateLabel.text = "Просмотрено"
         stateLabel.textColor = .darkGray
         titleLable.font = .boldSystemFont(ofSize: 20)
     }
@@ -71,5 +70,14 @@ final class TableNewsCell: UITableViewCell {
     func update(post: Post) {
         titleLable.text = post.title
         dateLabel.text = post.pubDate
+        //stateLabel.text = textState
+    }
+}
+
+extension TableNewsCell: ChangeState {
+    
+    func change(post: Post, state: String) -> String {
+        stateLabel.text = state
+        return state
     }
 }

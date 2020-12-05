@@ -14,6 +14,8 @@ final class TableNewsController: UIViewController {
     
     let tableViewNews = UITableView()
     let detailedNewsController = DetailedNewsController()
+    let tableNewsCell = TableNewsCell()
+    var textState: String = ""
     var posts: [Post]?
     
     let myRefreshControl: UIRefreshControl = {
@@ -22,7 +24,10 @@ final class TableNewsController: UIViewController {
         return refreshControl
     }()
     
+    //MARK: - Delegates
+    
     weak var delegateNews: PassData?
+    weak var delegateState: ChangeState?
     
     
     override func viewDidLoad() {
@@ -36,6 +41,7 @@ final class TableNewsController: UIViewController {
     
     private func configure() {
         delegateNews = detailedNewsController
+        delegateState = tableNewsCell
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
         tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
