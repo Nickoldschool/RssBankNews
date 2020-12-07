@@ -9,14 +9,14 @@ import UIKit
 
 final class TableNewsController: UIViewController {
     
-    
     //MARK: - Properties
     
     let tableViewNews = UITableView()
     let detailedNewsController = DetailedNewsController()
-    let tableNewsCell = TableNewsCell()
-    var textState: String = ""
+    let networkManager = NetworkManager()
     var posts: [Post]?
+    var defaultUrl = "https://www.banki.ru/xml/news.rss"
+    var index: IndexPath?
     
     let myRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -27,8 +27,6 @@ final class TableNewsController: UIViewController {
     //MARK: - Delegates
     
     weak var delegateNews: PassData?
-    weak var delegateState: ChangeState?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +34,16 @@ final class TableNewsController: UIViewController {
         configure()
         addSubViews()
         addConstraints()
-        fetchData()
+        fetchData(newUrl: defaultUrl)
+        
     }
     
     private func configure() {
         delegateNews = detailedNewsController
-        delegateState = tableNewsCell
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
+        let rightButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addURL))
+        navigationItem.rightBarButtonItem = rightButton
         tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
         tableViewNews.delegate = self
         tableViewNews.dataSource = self
@@ -64,9 +64,13 @@ final class TableNewsController: UIViewController {
         ])
     }
     
-    private func fetchData() {
-        let networkManager = NetworkManager()
-        networkManager.parseNews(url: "https://www.banki.ru/xml/news.rss") { (posts) in
+    func segueToDetailVC() {
+        navigationController?.pushViewController(detailedNewsController, animated: true)
+    }
+    
+    private func fetchData(newUrl: String) {
+        defaultUrl = newUrl
+        networkManager.parseNews(url: defaultUrl) { (posts) in
             self.posts = posts
             OperationQueue.main.addOperation {
                 self.tableViewNews.reloadSections(IndexSet(integer: 0), with: .left)
@@ -75,10 +79,25 @@ final class TableNewsController: UIViewController {
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
-        fetchData()
+        fetchData(newUrl: defaultUrl)
         tableViewNews.reloadData()
         sender.endRefreshing()
     }
     
+    @objc private func addURL() {
+        let alert = UIAlertController(title: "Do you want to add new source?", message: "Paste new URL", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addTextField { (newTextField) in
+            newTextField.placeholder = "Enter URL of source"
+        }
+        let saveAction = UIAlertAction(title: "Add", style: .default) { (action) in
+            guard let txt = alert.textFields?.first?.text else { return }
+            self.defaultUrl = txt
+            self.fetchData(newUrl: self.defaultUrl)
+        }
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 

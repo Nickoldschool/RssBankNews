@@ -7,16 +7,9 @@
 
 import UIKit
 
-// Для изменения статуса ячейки на "Просмотрено" на главной странице
-
-protocol ChangeState: AnyObject {
-    func change(post: Post, state: String) -> String
-}
-
-
 final class TableNewsCell: UITableViewCell {
     
-    static var identifier = "WeatherTableViewCell"
+    static var identifier = "TableNewsCell"
     let titleLable = UILabel()
     let dateLabel = UILabel()
     let stateLabel = UILabel()
@@ -60,24 +53,23 @@ final class TableNewsCell: UITableViewCell {
             
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-
+            
             stateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             stateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            
         ])
     }
     
     func update(post: Post) {
         titleLable.text = post.title
         dateLabel.text = post.pubDate
-        //stateLabel.text = textState
+//        if post.firstIndex(of: index.row) == index.row {
+//            stateLabel.text = "Просмотрено"
+//        }
     }
-}
-
-extension TableNewsCell: ChangeState {
     
-    func change(post: Post, state: String) -> String {
-        stateLabel.text = state
-        return state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //accessoryType = .none
     }
+    
 }

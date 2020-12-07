@@ -8,16 +8,15 @@
 import UIKit
 
 extension TableNewsController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let currentPost = posts?[indexPath.row] else { return  }
+        guard let currentPost = posts?[indexPath.row] else { return }
         switch indexPath.row {
-        case 0...indexPath.row:
+        case indexPath.row:
             delegateNews?.loadNews(post: currentPost)
-            //delegateState?.change(post: currentPost, state: "Просмотрено")
-            tableViewNews.cellForRow(at: indexPath)?.accessoryType = .checkmark
             tableViewNews.reloadData()
-            navigationController?.pushViewController(detailedNewsController, animated: true)
+            //tableViewNews.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            segueToDetailVC()
         default:
             print("Something went wrong")
         }
