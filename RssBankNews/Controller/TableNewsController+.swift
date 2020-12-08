@@ -14,16 +14,16 @@ extension TableNewsController: UITableViewDelegate {
         switch indexPath.row {
         case indexPath.row:
             delegateNews?.loadNews(post: currentPost)
-            tableViewNews.reloadData()
-            //tableViewNews.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            tableIndex = indexPath
             segueToDetailVC()
+            tableViewNews.reloadData()
         default:
             print("Something went wrong")
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 125
     }
 }
 
@@ -38,7 +38,10 @@ extension TableNewsController: UITableViewDataSource {
         guard let cell = tableViewNews.dequeueReusableCell(withIdentifier: TableNewsCell.identifier, for: indexPath) as? TableNewsCell else { return UITableViewCell() }
         guard let item = posts?[indexPath.row] else { return UITableViewCell()}
         cell.update(post: item)
-        //cell.accessoryType = .disclosureIndicator
+        cell.cellIndex = indexPath
+        if cell.cellIndex == tableIndex {
+            cell.state(index: indexPath)
+        }
         return cell
     }
     

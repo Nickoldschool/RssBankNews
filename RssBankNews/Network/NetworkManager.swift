@@ -11,11 +11,6 @@ class NetworkManager: NSObject {
     
     var posts: [Post] = []
     
-    var url: URL? {
-        nil
-        // Get and Set via User defaults
-    }
-    
     var currentElement: String = ""
     
     var currentTitle: String = "" {
@@ -52,12 +47,10 @@ class NetworkManager: NSObject {
                 }
                 return
             }
-            if data != nil {
-                self.posts.removeAll()
-                let parser = XMLParser(data: data)
-                parser.delegate = self
-                parser.parse()
-            }
+            self.posts.removeAll()
+            let parser = XMLParser(data: data)
+            parser.delegate = self
+            parser.parse()
         }
         task.resume()
     }

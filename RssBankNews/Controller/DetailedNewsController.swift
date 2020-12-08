@@ -15,9 +15,22 @@ protocol PassData: AnyObject {
 
 final class DetailedNewsController: UIViewController {
     
-    let titleLable = UILabel()
-    let dateLabel = UILabel()
-    let descriptionLabel = UITextView()
+    //MARK: - Properties
+    
+    lazy var  titleLable: UILabel = {
+        let label = UILabel(font: .boldSystemFont(ofSize: 20), textColor: .black)
+        return label
+    }()
+    
+    let dateLabel: UILabel = {
+        let label = UILabel(font: .systemFont(ofSize: 16), textColor: .black)
+        return label
+    }()
+    
+    let descriptionLabel: UITextView = {
+        let textView = UITextView(font:.systemFont(ofSize: 18))
+        return textView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +41,7 @@ final class DetailedNewsController: UIViewController {
     }
 
     private func configure() {
-        
         view.backgroundColor = .white
-        [titleLable, dateLabel].forEach {
-            $0.numberOfLines = 0
-        }
-        
-        titleLable.textAlignment = .center
-        titleLable.font = .boldSystemFont(ofSize: 20)
-        descriptionLabel.font = .systemFont(ofSize: 18)
-        descriptionLabel.isEditable = false
     }
     
     private func addSubViews() {
@@ -47,11 +51,6 @@ final class DetailedNewsController: UIViewController {
     }
     
     private func addConstraints() {
-        
-        [titleLable, dateLabel, descriptionLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
         NSLayoutConstraint.activate([
             titleLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLable.widthAnchor.constraint(equalToConstant: view.bounds.width - 15),

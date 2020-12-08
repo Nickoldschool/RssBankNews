@@ -10,9 +10,23 @@ import UIKit
 final class TableNewsCell: UITableViewCell {
     
     static var identifier = "TableNewsCell"
-    let titleLable = UILabel()
-    let dateLabel = UILabel()
-    let stateLabel = UILabel()
+    
+    lazy var titleLable: UILabel = {
+        let label = UILabel(font: .boldSystemFont(ofSize: 20), textColor: .black)
+        return label
+    }()
+    
+    lazy var dateLabel: UILabel = {
+        let label = UILabel(font: .systemFont(ofSize: 16), textColor: .black)
+        return label
+    }()
+    
+    lazy var stateLabel: UILabel = {
+        let label = UILabel(font: .systemFont(ofSize: 16), textColor: .darkGray)
+        return label
+    }()
+    
+    var cellIndex: IndexPath?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,11 +41,7 @@ final class TableNewsCell: UITableViewCell {
     }
     
     private func configure() {
-        
-        titleLable.numberOfLines = 0
-        titleLable.textAlignment = .center
-        stateLabel.textColor = .darkGray
-        titleLable.font = .boldSystemFont(ofSize: 20)
+        accessoryType = .disclosureIndicator
     }
     
     private func addSubViews() {
@@ -41,13 +51,8 @@ final class TableNewsCell: UITableViewCell {
     }
     
     private func addConstraints() {
-        
-        [titleLable, dateLabel, stateLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
         NSLayoutConstraint.activate([
-            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             titleLable.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             titleLable.leadingAnchor.constraint(equalTo: leadingAnchor),
             
@@ -62,14 +67,11 @@ final class TableNewsCell: UITableViewCell {
     func update(post: Post) {
         titleLable.text = post.title
         dateLabel.text = post.pubDate
-//        if post.firstIndex(of: index.row) == index.row {
-//            stateLabel.text = "Просмотрено"
-//        }
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        //accessoryType = .none
+    func state(index: IndexPath) {
+        if cellIndex?.row == index.row {
+            stateLabel.text = "Просмотрено"
+        }
     }
-    
 }

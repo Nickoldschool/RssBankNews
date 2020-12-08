@@ -11,20 +11,35 @@ final class TableNewsController: UIViewController {
     
     //MARK: - Properties
     
-    let tableViewNews = UITableView()
     let detailedNewsController = DetailedNewsController()
     let networkManager = NetworkManager()
+    let tableCell = TableNewsCell()
+    var tableIndex: IndexPath?
     var posts: [Post]?
     var defaultUrl = "https://www.banki.ru/xml/news.rss"
-    var index: IndexPath?
     
-    let myRefreshControl: UIRefreshControl = {
+    lazy var tableViewNews: UITableView = {
+        let table = UITableView()
+        table.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
+        table.delegate = self
+        table.dataSource = self
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.refreshControl = myRefreshControl
+        return table
+    }()
+    
+    lazy var myRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         return refreshControl
     }()
     
-    //MARK: - Delegates
+    lazy var rightButton: UIBarButtonItem = {
+        let rightButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addURL))
+        return rightButton
+    }()
+    
+    //MARK: - Delegate
     
     weak var delegateNews: PassData?
     
@@ -35,20 +50,13 @@ final class TableNewsController: UIViewController {
         addSubViews()
         addConstraints()
         fetchData(newUrl: defaultUrl)
-        
     }
     
     private func configure() {
         delegateNews = detailedNewsController
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
-        let rightButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addURL))
         navigationItem.rightBarButtonItem = rightButton
-        tableViewNews.register(TableNewsCell.self, forCellReuseIdentifier: TableNewsCell.identifier)
-        tableViewNews.delegate = self
-        tableViewNews.dataSource = self
-        tableViewNews.translatesAutoresizingMaskIntoConstraints = false
-        tableViewNews.refreshControl = myRefreshControl
     }
     
     private func addSubViews() {
@@ -68,11 +76,11 @@ final class TableNewsController: UIViewController {
         navigationController?.pushViewController(detailedNewsController, animated: true)
     }
     
-    private func fetchData(newUrl: String) {
+    func fetchData(newUrl: String) {
         defaultUrl = newUrl
         networkManager.parseNews(url: defaultUrl) { (posts) in
             self.posts = posts
-            OperationQueue.main.addOperation {
+            DispatchQueue.main.async {
                 self.tableViewNews.reloadSections(IndexSet(integer: 0), with: .left)
             }
         }
