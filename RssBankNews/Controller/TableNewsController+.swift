@@ -23,14 +23,14 @@ extension TableNewsController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125
+        return Constants.cellHeight
     }
 }
 
 extension TableNewsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let posts = posts else { return 0 }
+        guard let posts = posts else { return Constants.defaultNumberOfRows }
         return posts.count
     }
     

@@ -12,17 +12,17 @@ final class TableNewsCell: UITableViewCell {
     static var identifier = "TableNewsCell"
     
     lazy var titleLable: UILabel = {
-        let label = UILabel(font: .boldSystemFont(ofSize: 20), textColor: .black)
+        let label = UILabel(font: .boldSystemFont(ofSize: Constants.titleFont), textColor: .black)
         return label
     }()
     
     lazy var dateLabel: UILabel = {
-        let label = UILabel(font: .systemFont(ofSize: 16), textColor: .black)
+        let label = UILabel(font: .systemFont(ofSize: Constants.defaultFont), textColor: .black)
         return label
     }()
     
     lazy var stateLabel: UILabel = {
-        let label = UILabel(font: .systemFont(ofSize: 16), textColor: .darkGray)
+        let label = UILabel(font: .systemFont(ofSize: Constants.defaultFont), textColor: .darkGray)
         return label
     }()
     
@@ -52,15 +52,15 @@ final class TableNewsCell: UITableViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: Constants.toptitleAnchor),
             titleLable.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             titleLable.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingAnchor),
             
             stateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            stateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.trailingAnchor),
         ])
     }
     

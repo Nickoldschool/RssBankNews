@@ -1,5 +1,5 @@
 //
-//  NetworkManager+.swift
+//  Parser.swift
 //  RssBankNews
 //
 //  Created by Nick Chekmazov on 04.12.2020.
@@ -7,7 +7,33 @@
 
 import UIKit
 
-extension NetworkManager: XMLParserDelegate {
+final class Parser: NSObject, XMLParserDelegate {
+    
+    var posts: [Post] = []
+    
+    var currentElement: String = ""
+    
+    var currentTitle: String = "" {
+        didSet {
+            currentTitle = currentTitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        }
+    }
+    
+    var currentDescription: String = "" {
+        didSet {
+            currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            currentDescription = currentDescription.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+        }
+    }
+    
+    var currentPubDate: String = "" {
+        didSet {
+            currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            currentPubDate = currentPubDate.replacingOccurrences(of: "+0300", with: "")
+        }
+    }
+    
+    var parserCompletionHandler: (([Post])-> Void)?
 
     //MARK:- XML Parser Delegate
     

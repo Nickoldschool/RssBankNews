@@ -7,36 +7,12 @@
 
 import UIKit
 
-class NetworkManager: NSObject {
+final class NetworkManager {
     
-    var posts: [Post] = []
-    
-    var currentElement: String = ""
-    
-    var currentTitle: String = "" {
-        didSet {
-            currentTitle = currentTitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        }
-    }
-    
-    var currentDescription: String = "" {
-        didSet {
-            currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            currentDescription = currentDescription.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-        }
-    }
-    
-    var currentPubDate: String = "" {
-        didSet {
-            currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            currentPubDate = currentPubDate.replacingOccurrences(of: "+0300", with: "")
-        }
-    }
-    
-    var parserCompletionHandler: (([Post])-> Void)?
+    let networkParser = Parser()
     
     func parseNews(url: String, completionHandler: (([Post])-> Void)?) {
-        self.parserCompletionHandler = completionHandler
+        self.networkParser.parserCompletionHandler = completionHandler
         
         let request = URLRequest(url: URL(string: url)!)
         let urlSession = URLSession.shared
@@ -47,9 +23,9 @@ class NetworkManager: NSObject {
                 }
                 return
             }
-            self.posts.removeAll()
+            self.networkParser.posts.removeAll()
             let parser = XMLParser(data: data)
-            parser.delegate = self
+            parser.delegate = self.networkParser
             parser.parse()
         }
         task.resume()
