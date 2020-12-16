@@ -93,19 +93,8 @@ final class TableNewsController: UIViewController {
     }
     
     @objc private func addURL() {
-        let alert = UIAlertController(title: "Do you want to add new source?", message: "Paste new URL", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addTextField { (newTextField) in
-            newTextField.placeholder = "Enter URL of source"
-        }
-        let saveAction = UIAlertAction(title: "Add", style: .default) { (action) in
-            guard let txt = alert.textFields?.first?.text else { return }
-            self.defaultUrl = txt
-            self.fetchData(newUrl: self.defaultUrl)
-        }
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+        let alert = Alert()
+        let errorAlert = Alert()
+        alert.addUrl(vc: self, errorAlert: errorAlert)
     }
 }
-

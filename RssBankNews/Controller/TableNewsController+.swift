@@ -14,9 +14,12 @@ extension TableNewsController: UITableViewDelegate {
         switch indexPath.row {
         case indexPath.row:
             delegateNews?.loadNews(post: currentPost)
-            tableIndex = indexPath
             segueToDetailVC()
-            tableViewNews.reloadData()
+            tableViewNews.beginUpdates()
+            if let cell = tableViewNews.cellForRow(at: indexPath) as? TableNewsCell {
+                cell.state(index: indexPath)
+            }
+            tableViewNews.endUpdates()
         default:
             print("Something went wrong")
         }
@@ -39,9 +42,6 @@ extension TableNewsController: UITableViewDataSource {
         guard let item = posts?[indexPath.row] else { return UITableViewCell()}
         cell.update(post: item)
         cell.cellIndex = indexPath
-        if cell.cellIndex == tableIndex {
-            cell.state(index: indexPath)
-        }
         return cell
     }
     

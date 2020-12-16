@@ -10,11 +10,11 @@ import UIKit
 struct Constants {
     static let titleFont: CGFloat = 20
     static let defaultFont: CGFloat = 16
-    static let toptitleAnchor: CGFloat = 10
+    static let topCellAnchor: CGFloat = 10
     static let leadingAnchor: CGFloat = 10
     static let trailingAnchor: CGFloat = -15
     static let textViewFont: CGFloat = 18
-    static let topAnchor: CGFloat = 20
+    static let topDetailVCAnchor: CGFloat = 20
     static let titleWidthAnchor: CGFloat = 20
     static let diffAncor: CGFloat = 15
     static let descriptionWidthAnchor: CGFloat = 20

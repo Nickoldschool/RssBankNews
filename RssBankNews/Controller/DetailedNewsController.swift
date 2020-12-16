@@ -50,7 +50,7 @@ final class DetailedNewsController: UIViewController {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            titleLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.topAnchor),
+            titleLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.topDetailVCAnchor),
             titleLable.widthAnchor.constraint(equalToConstant: view.bounds.width - Constants.titleWidthAnchor),
             titleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 

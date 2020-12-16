@@ -14,5 +14,7 @@ extension UITextView {
         self.font = font
         self.translatesAutoresizingMaskIntoConstraints = false
         self.isEditable = false
+        self.backgroundColor = .white
+        self.textColor = .black
     }
 }

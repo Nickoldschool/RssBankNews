@@ -11,6 +11,8 @@ final class TableNewsCell: UITableViewCell {
     
     static var identifier = "TableNewsCell"
     
+    var cellIndex: IndexPath?
+    
     lazy var titleLable: UILabel = {
         let label = UILabel(font: .boldSystemFont(ofSize: Constants.titleFont), textColor: .black)
         return label
@@ -26,8 +28,6 @@ final class TableNewsCell: UITableViewCell {
         return label
     }()
     
-    var cellIndex: IndexPath?
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -41,6 +41,7 @@ final class TableNewsCell: UITableViewCell {
     }
     
     private func configure() {
+        backgroundColor = .white
         accessoryType = .disclosureIndicator
     }
     
@@ -52,7 +53,7 @@ final class TableNewsCell: UITableViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: Constants.toptitleAnchor),
+            titleLable.topAnchor.constraint(equalTo: topAnchor, constant: Constants.topCellAnchor),
             titleLable.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             titleLable.leadingAnchor.constraint(equalTo: leadingAnchor),
             
@@ -69,9 +70,16 @@ final class TableNewsCell: UITableViewCell {
         dateLabel.text = post.pubDate
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        stateLabel.text = ""
+    }
+    
     func state(index: IndexPath) {
         if cellIndex?.row == index.row {
             stateLabel.text = "Просмотрено"
+        } else {
+            stateLabel.text = ""
         }
     }
 }
