@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Alert {
+final class Alert {
     
     func showAlert(vc: UIViewController) {
         let alert = UIAlertController(title: "Error", message: "Wrong URL", preferredStyle: .alert)
@@ -32,7 +32,9 @@ class Alert {
                 vc.fetchData(newUrl: vc.defaultUrl )
             }
         })
-        vc.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
     
 }

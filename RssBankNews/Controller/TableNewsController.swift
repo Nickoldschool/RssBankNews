@@ -11,10 +11,8 @@ final class TableNewsController: UIViewController {
     
     //MARK: - Properties
     
-    let detailedNewsController = DetailedNewsController()
-    let networkManager = NetworkManager()
-    let tableCell = TableNewsCell()
-    var tableIndex: IndexPath?
+    private let detailedNewsController = DetailedNewsController()
+    private let networkManager = NetworkManager()
     var posts: [Post]?
     var defaultUrl = "https://www.banki.ru/xml/news.rss"
     
@@ -28,20 +26,24 @@ final class TableNewsController: UIViewController {
         return table
     }()
     
-    lazy var myRefreshControl: UIRefreshControl = {
+    private lazy var myRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         return refreshControl
     }()
     
-    lazy var rightButton: UIBarButtonItem = {
+    private lazy var rightButton: UIBarButtonItem = {
         let rightButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addURL))
         return rightButton
     }()
     
     //MARK: - Delegate
-    
+
     weak var delegateNews: PassData?
+    
+    //MARK: - Callback 
+    
+    //var completion: ((Post) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()

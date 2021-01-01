@@ -9,21 +9,19 @@ import UIKit
 
 final class TableNewsCell: UITableViewCell {
     
-    static var identifier = "TableNewsCell"
-    
-    var cellIndex: IndexPath?
-    
-    lazy var titleLable: UILabel = {
+    static let identifier = "TableNewsCell"
+
+    private lazy var titleLable: UILabel = {
         let label = UILabel(font: .boldSystemFont(ofSize: Constants.titleFont), textColor: .black)
         return label
     }()
     
-    lazy var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel(font: .systemFont(ofSize: Constants.defaultFont), textColor: .black)
         return label
     }()
     
-    lazy var stateLabel: UILabel = {
+    private lazy var stateLabel: UILabel = {
         let label = UILabel(font: .systemFont(ofSize: Constants.defaultFont), textColor: .darkGray)
         return label
     }()
@@ -65,18 +63,19 @@ final class TableNewsCell: UITableViewCell {
         ])
     }
     
-    func update(post: Post) {
+    func update(post: Post, read: Bool) {
         titleLable.text = post.title
         dateLabel.text = post.pubDate
+        isRead(read: read)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         stateLabel.text = ""
     }
-    
-    func state(index: IndexPath) {
-        if cellIndex?.row == index.row {
+
+    func isRead(read: Bool) {
+        if read == true {
             stateLabel.text = "Просмотрено"
         } else {
             stateLabel.text = ""

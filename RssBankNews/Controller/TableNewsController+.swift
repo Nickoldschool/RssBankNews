@@ -17,8 +17,9 @@ extension TableNewsController: UITableViewDelegate {
             segueToDetailVC()
             tableViewNews.beginUpdates()
             if let cell = tableViewNews.cellForRow(at: indexPath) as? TableNewsCell {
-                cell.state(index: indexPath)
+                cell.isRead(read: true)
             }
+            //completion!(currentPost)
             tableViewNews.endUpdates()
         default:
             print("Something went wrong")
@@ -40,9 +41,7 @@ extension TableNewsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableViewNews.dequeueReusableCell(withIdentifier: TableNewsCell.identifier, for: indexPath) as? TableNewsCell else { return UITableViewCell() }
         guard let item = posts?[indexPath.row] else { return UITableViewCell()}
-        cell.update(post: item)
-        cell.cellIndex = indexPath
+        cell.update(post: item, read: false)
         return cell
     }
-    
 }

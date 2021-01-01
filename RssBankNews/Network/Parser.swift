@@ -11,22 +11,22 @@ final class Parser: NSObject, XMLParserDelegate {
     
     var posts: [Post] = []
     
-    var currentElement: String = ""
+    private var currentElement: String = ""
     
-    var currentTitle: String = "" {
+    private var currentTitle: String = "" {
         didSet {
             currentTitle = currentTitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
     }
     
-    var currentDescription: String = "" {
+    private var currentDescription: String = "" {
         didSet {
             currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             currentDescription = currentDescription.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         }
     }
     
-    var currentPubDate: String = "" {
+    private var currentPubDate: String = "" {
         didSet {
             currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             currentPubDate = currentPubDate.replacingOccurrences(of: "+0300", with: "")
