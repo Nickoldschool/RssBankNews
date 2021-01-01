@@ -7,36 +7,34 @@
 
 import UIKit
 
-protocol PassData: AnyObject {
-    func loadNews(post: Post)
-}
-
 final class DetailedNewsController: UIViewController {
     
     //MARK: - Properties
     
-    private lazy var  titleLabel: UILabel = {
+    lazy var  titleLabel: UILabel = {
         let label = UILabel(font: .boldSystemFont(ofSize: Constants.titleFont), textColor: .black)
         return label
     }()
     
-    private let dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let label = UILabel(font: .systemFont(ofSize: Constants.defaultFont), textColor: .black)
         return label
     }()
     
-    private let descriptionLabel: UITextView = {
+    let descriptionLabel: UITextView = {
         let textView = UITextView(font:.systemFont(ofSize: Constants.textViewFont))
         return textView
     }()
     
-    //weak var tableNewsController: TableNewsController!
+    
+    //MARK: - Callback
+    
+    var completion: ((DetailedNewsController) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configure()
-        //moreInfo()
         addSubViews()
         addConstraints()
     }
@@ -45,14 +43,6 @@ final class DetailedNewsController: UIViewController {
     private func configure() {
         view.backgroundColor = .white
     }
-    
-//    private func moreInfo() {
-//        tableNewsController.completion = { [unowned self] moreInfo in
-//            self.titleLabel.text = moreInfo.title
-//            self.dateLabel.text = moreInfo.pubDate
-//            self.descriptionLabel.text = moreInfo.description
-//        }
-//    }
     
     private func addSubViews() {
         [titleLabel, dateLabel, descriptionLabel].forEach {
@@ -77,12 +67,4 @@ final class DetailedNewsController: UIViewController {
     }
 }
 
-extension DetailedNewsController: PassData {
-    
-    func loadNews(post: Post) {
-        titleLabel.text = post.title
-        dateLabel.text = post.pubDate
-        descriptionLabel.text = post.description
-    }
-}
 

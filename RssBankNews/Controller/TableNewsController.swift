@@ -11,7 +11,7 @@ final class TableNewsController: UIViewController {
     
     //MARK: - Properties
     
-    private let detailedNewsController = DetailedNewsController()
+    let detailedNewsController = DetailedNewsController()
     private let networkManager = NetworkManager()
     var posts: [Post]?
     var defaultUrl = "https://www.banki.ru/xml/news.rss"
@@ -37,14 +37,6 @@ final class TableNewsController: UIViewController {
         return rightButton
     }()
     
-    //MARK: - Delegate
-
-    weak var delegateNews: PassData?
-    
-    //MARK: - Callback 
-    
-    //var completion: ((Post) -> ())?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +46,15 @@ final class TableNewsController: UIViewController {
         fetchData(newUrl: defaultUrl)
     }
     
+    func moreInfo(post: Post) {
+        detailedNewsController.completion = { [unowned self] moreInfo in
+            moreInfo.titleLabel.text = post.title
+            moreInfo.dateLabel.text = post.pubDate
+            moreInfo.descriptionLabel.text = post.description
+        }
+    }
+    
     private func configure() {
-        delegateNews = detailedNewsController
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
         navigationItem.rightBarButtonItem = rightButton

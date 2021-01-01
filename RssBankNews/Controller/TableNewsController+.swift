@@ -13,13 +13,9 @@ extension TableNewsController: UITableViewDelegate {
         guard let currentPost = posts?[indexPath.row] else { return }
         switch indexPath.row {
         case indexPath.row:
-            delegateNews?.loadNews(post: currentPost)
             segueToDetailVC()
             tableViewNews.beginUpdates()
-            if let cell = tableViewNews.cellForRow(at: indexPath) as? TableNewsCell {
-                cell.isRead(read: true)
-            }
-            //completion!(currentPost)
+            moreInfo(post: currentPost)
             tableViewNews.endUpdates()
         default:
             print("Something went wrong")
