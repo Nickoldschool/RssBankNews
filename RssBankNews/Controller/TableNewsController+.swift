@@ -15,7 +15,10 @@ extension TableNewsController: UITableViewDelegate {
         case indexPath.row:
             segueToDetailVC()
             tableViewNews.beginUpdates()
-            moreInfo(post: currentPost)
+            if let cell = tableViewNews.cellForRow(at: indexPath) as? TableNewsCell {
+                cell.isRead(read: true)
+            }
+            detailedNewsController.moreInfo(post: currentPost)
             tableViewNews.endUpdates()
         default:
             print("Something went wrong")

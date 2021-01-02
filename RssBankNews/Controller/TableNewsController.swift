@@ -46,14 +46,6 @@ final class TableNewsController: UIViewController {
         fetchData(newUrl: defaultUrl)
     }
     
-    func moreInfo(post: Post) {
-        detailedNewsController.completion = { [unowned self] moreInfo in
-            moreInfo.titleLabel.text = post.title
-            moreInfo.dateLabel.text = post.pubDate
-            moreInfo.descriptionLabel.text = post.description
-        }
-    }
-    
     private func configure() {
         view.backgroundColor = .white
         navigationItem.title = "Bank News"
