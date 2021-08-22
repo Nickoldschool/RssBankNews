@@ -24,10 +24,6 @@ extension TableNewsController: UITableViewDelegate {
             print("Something went wrong")
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constants.cellHeight
-    }
 }
 
 extension TableNewsController: UITableViewDataSource {

@@ -61,7 +61,7 @@ final class Parser: NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "item" {
-            let post = Post(title: currentTitle, description: currentDescription, pubDate: currentPubDate)
+            let post = Post(title: currentTitle, description: currentDescription, pubDate: currentPubDate, isRead: false)
             self.posts.append(post)
         }
     }

@@ -16,6 +16,8 @@ struct Constants {
     static let textViewFont: CGFloat = 18
     static let topDetailVCAnchor: CGFloat = 20
     static let titleWidthAnchor: CGFloat = 20
+    static let titleBottomAnchor: CGFloat = 20
+    static let dateLabelBottom: CGFloat = -10
     static let diffAncor: CGFloat = 15
     static let descriptionWidthAnchor: CGFloat = 20
     static let cellHeight: CGFloat = 125

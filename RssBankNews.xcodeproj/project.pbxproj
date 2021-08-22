@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4007B07E25C6CFF7009B9175 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4007B07D25C6CFF7009B9175 /* Realm */; };
+		4007B08025C6CFF7009B9175 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4007B07F25C6CFF7009B9175 /* RealmSwift */; };
 		402ECB182589305B00CAFBF1 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402ECB172589305B00CAFBF1 /* String+.swift */; };
 		404244FA25790C70000C08AE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404244F925790C70000C08AE /* Post.swift */; };
 		404244FD25790CDB000C08AE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404244FC25790CDB000C08AE /* NetworkManager.swift */; };
@@ -21,6 +23,8 @@
 		406BD4002580007600E5534D /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BD3FF2580007600E5534D /* UILabel+.swift */; };
 		406BD406258004FB00E5534D /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BD405258004FB00E5534D /* UITextView+.swift */; };
 		406BD4152580D01F00E5534D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BD4142580D01F00E5534D /* Constants.swift */; };
+		406D56AA25C6FE68007502BF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406D56A925C6FE68007502BF /* DataManager.swift */; };
+		406D56AD25C6FFB3007502BF /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406D56AC25C6FFB3007502BF /* PostModel.swift */; };
 		40BB7C4A2582A2E700B81127 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BB7C492582A2E700B81127 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +45,8 @@
 		406BD3FF2580007600E5534D /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		406BD405258004FB00E5534D /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		406BD4142580D01F00E5534D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		406D56A925C6FE68007502BF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		406D56AC25C6FFB3007502BF /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		40BB7C492582A2E700B81127 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,12 +55,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4007B08025C6CFF7009B9175 /* RealmSwift in Frameworks */,
+				4007B07E25C6CFF7009B9175 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4007B08325C6D87E009B9175 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				406D56A925C6FE68007502BF /* DataManager.swift */,
+				406D56AC25C6FFB3007502BF /* PostModel.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		402ECB1A2589395800CAFBF1 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				404CEAAA2577F980006FC834 /* Application */,
+				4007B08325C6D87E009B9175 /* Database */,
 				404244F625790C26000C08AE /* Network */,
 				404CEAA62577F8F5006FC834 /* Model */,
 				404CEAA72577F8FC006FC834 /* View */,
@@ -174,6 +192,10 @@
 			dependencies = (
 			);
 			name = RssBankNews;
+			packageProductDependencies = (
+				4007B07D25C6CFF7009B9175 /* Realm */,
+				4007B07F25C6CFF7009B9175 /* RealmSwift */,
+			);
 			productName = RssBankNews;
 			productReference = 404CEA822577C67E006FC834 /* RssBankNews.app */;
 			productType = "com.apple.product-type.application";
@@ -201,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 404CEA792577C67E006FC834;
+			packageReferences = (
+				4007B07C25C6CFF7009B9175 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+			);
 			productRefGroup = 404CEA832577C67E006FC834 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -228,8 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				40424508257A5178000C08AE /* Parser.swift in Sources */,
+				406D56AD25C6FFB3007502BF /* PostModel.swift in Sources */,
 				406BD4152580D01F00E5534D /* Constants.swift in Sources */,
 				404CEABD25780846006FC834 /* TableNewsCell.swift in Sources */,
+				406D56AA25C6FE68007502BF /* DataManager.swift in Sources */,
 				404CEAA12577F7F4006FC834 /* DetailedNewsController.swift in Sources */,
 				404CEAB825780505006FC834 /* TableNewsController+.swift in Sources */,
 				404244FD25790CDB000C08AE /* NetworkManager.swift in Sources */,
@@ -433,6 +460,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4007B07C25C6CFF7009B9175 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4007B07D25C6CFF7009B9175 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4007B07C25C6CFF7009B9175 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		4007B07F25C6CFF7009B9175 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4007B07C25C6CFF7009B9175 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 404CEA7A2577C67E006FC834 /* Project object */;
 }

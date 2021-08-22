@@ -22,6 +22,8 @@ final class TableNewsController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 150
         table.refreshControl = myRefreshControl
         return table
     }()
@@ -72,12 +74,23 @@ final class TableNewsController: UIViewController {
     func fetchData(newUrl: String) {
         defaultUrl = newUrl
         networkManager.parseNews(url: defaultUrl) { (posts) in
+            //self.savePosts(posts: posts)
             self.posts = posts
             DispatchQueue.main.async {
                 self.tableViewNews.reloadSections(IndexSet(integer: 0), with: .left)
             }
         }
     }
+    
+//    private func savePosts(posts: [Post]) {
+//        let container = try! Container()
+//        try! container.write { transaction in
+//            for post in posts {
+//                transaction.add(post)
+//            }
+//        }
+//        container.deleteAllObjects()
+//    }
     
     @objc private func refresh(sender: UIRefreshControl) {
         fetchData(newUrl: defaultUrl)

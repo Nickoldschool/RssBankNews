@@ -45,17 +45,18 @@ final class TableNewsCell: UITableViewCell {
     
     private func addSubViews() {
         [titleLable, dateLabel, stateLabel].forEach {
-            contentView.addSubview($0)
+            addSubview($0)
         }
     }
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
             titleLable.topAnchor.constraint(equalTo: topAnchor, constant: Constants.topCellAnchor),
-            titleLable.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            titleLable.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLable.widthAnchor.constraint(equalToConstant: self.bounds.width - 20),
+            titleLable.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dateLabel.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: Constants.titleBottomAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.dateLabelBottom),
             dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingAnchor),
             
             stateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
